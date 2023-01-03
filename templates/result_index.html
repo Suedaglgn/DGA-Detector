@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+    <style>
+            footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                height: 40px;
+            }
+            body {
+                 background-image: url('../static/images/cover-image_old.png');
+                background-attachment: fixed;
+                background-position: center;
+                background-repeat: round;
+                background-color: white;
+            }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <br><br><br><br><br><br>
+                <div class="header">
+                    <h1 style="text-align: center; color: darkorange" class="text-muted"> <b>Result</b></h1>
+                </div>
+
+                  <div class="row marketing">
+                    <div class="col-md-4">
+                        <canvas width="400" height="150"></canvas>
+                        <h2 style="text-align: center;color: darkorange" class="text-muted"> <b>{{ result }}</b> </h2>
+                    </div>
+
+                </div>
+
+                <footer style="text-align: center" class="footer">
+                    <p style="color: white">&copy; <b> DGA Detector </b> </p>
+                </footer>
+
+    </div>
+
+</body>
+</html>

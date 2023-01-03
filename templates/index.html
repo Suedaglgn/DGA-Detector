@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>DGA Detector</title>
+
+         <style>
+            footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                height: 40px;
+            }
+            body {
+                background-image: url('../static/images/cover-image_old.png');
+                background-attachment: fixed;
+                background-position: center;
+                background-repeat: round;
+                {#background-color: lightskyblue;#}
+                background-color: white;
+                alignment: center;
+            }
+            button {
+                alignment: center;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                background-color: #4CAF50;
+                width: 200px;
+            }
+            input[type=text] {
+                alignment: center;
+                color: #4CAF50;
+                padding: 15px 32px;
+                text-align: center;
+                font-size: 16px;
+                margin: 4px 2px;
+                width: 130px;
+            }
+            input[type=submit] {
+                alignment: center;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                background-color: #4CAF50;
+                width: 200px;
+            }
+            input[type=file] {
+                alignment: center;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: none;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                width: 300px;
+            }
+            .custom-file-upload {
+                alignment: center;
+                border: none;
+                color: #4CAF50;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                width: 140px;
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>
+            <div class="container" >
+                <br>
+                <div class="header">
+                    <h1 style="text-align: center; color: darkorange" class="text-muted"> <b> Patika.dev - Huawei Cloud </b></h1>
+                </div>
+                    <div class="jumbotron">
+                        <h2 style="text-align: center; color: darkorange" >Final Project</h2>
+                        <p class="lead"></p>
+                    </p>
+                </div>
+                <br>
+                 <div align="center">
+                    <div class="col-md-4">
+                       <h3 style="color: darkorange"> ----- Predict a domain! -----</h3>
+                    </div>
+                </div>
+
+                  <div align="center">
+                    <div class="col-md-4">
+                        <input type="text" id="domain" value="sampledomain.com">
+                        <br>
+                        <br>
+                        <button class="button" onclick="httpPost('/detect', document.getElementById('domain').value);">Predict</button>
+                    </div>
+                </div>
+
+                <br>
+                <div align="center">
+                    <div class="col-md-4">
+                       <h3 style="color: darkorange"> ----- Predict a domain list! -----</h3>
+                    </div>
+                </div>
+                 <div align="center">
+                    <div class="col-md-4">
+                        <form action = "http://localhost:5000/bulk" method = "POST"
+                             enctype = "multipart/form-data">
+                            <label for="file-upload" class="custom-file-upload" style="vertical-align: center">Browse</label>
+                            <br>
+                             <input type = "file" id="file-upload" name = "file" style="vertical-align: center"/>
+                            <br>
+                             <input type = "submit" value="Predict"/>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <br>
+                 <div align="center">
+                    <div class="col-md-4">
+                       <h3 style="color: darkorange"> ----- Show whitelist! -----</h3>
+                    </div>
+                </div>
+                  <div align="center">
+                    <div class="col-md-4">
+                        <button class="button" onclick="whitelist();">Show</button>
+                    </div>
+                </div>
+                <br>
+                <div align="center">
+                    <div class="col-md-4">
+                       <h3 style="color: darkorange"> ----- Upload whitelist! -----</h3>
+                    </div>
+                </div>
+                 <div align="center">
+                    <div class="col-md-4">
+                        <form action = "http://localhost:5000/upload_whitelist" method = "POST"
+                             enctype = "multipart/form-data">
+                            <label for="file-upload2" class="custom-file-upload" style="vertical-align: center">Browse</label>
+                            <br>
+                             <input type = "file" id="file-upload2" name = "file" style="vertical-align: center"/>
+                            <br>
+                             <input type = "submit" value="Upload" onclick="upload_whitelist(event)"/>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div align="center">
+                    <div class="col-md-4">
+                       <h3 style="color: darkorange"> ----- List whitelists! -----</h3>
+                    </div>
+                </div>
+                 <div align="center">
+                  <div align="center">
+                    <div class="col-md-4">
+                        <button class="button" onclick="list_wlist();">Show</button>
+                    </div>
+                </div>
+                </div>
+                <br>
+            </div>
+                <footer style="text-align: center" class="footer">
+                    <p style="color: white">&copy; <b> DGA Detector </b> </p>
+                </footer>
+
+        </div>
+    </body>
+
+    <script>
+        function httpPost(url, params)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "POST", url, false ); // false for synchronous request
+            xmlHttp.setRequestHeader('Content-type', "application/json;charset=UTF-8")
+            xmlHttp.send(JSON.stringify({"domain": params}));
+            {#return xmlHttp.responseText;#}
+            window.open("http://localhost:5000/result" + "/predict")
+        }
+        function whitelist()
+        {
+            window.open("http://localhost:5000/result" + "/whitelist")
+
+        }
+           function upload_whitelist(e)
+        {
+            if(!confirm('Do you want to upload this file?')) {
+            } else {
+                confirm('Whitelist is uploaded succesfully.')
+            }
+        }
+         function list_wlist()
+        {
+            window.open("http://localhost:5000/result" + "/list_wlist")
+
+        }
+    </script>
+
+</html>

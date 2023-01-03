@@ -1,0 +1,7 @@
+fasttext
+Flask==2.0.2
+pandas==1.1.5
+tldextract==3.3.0
+transformers==4.17.0
+Werkzeug==2.1.2
+openpyxl
