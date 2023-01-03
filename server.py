@@ -3,13 +3,11 @@ import time
 import fasttext
 import pandas as pd
 import tldextract
-import cgi
 from flask import Flask, jsonify, request, send_file, render_template
-from werkzeug.utils import secure_filename
 from bert_utils import tokenize_list, tokenize_value, predict_list, predict_value, load_pretrained
 
 # model threshold
-THRESHOLD = 0.7
+THRESHOLD = 0.5
 
 # load bert model via corpus
 bert = load_pretrained(path="model/vocab.txt")
@@ -28,6 +26,9 @@ curr_white_list = "White_list.txt"
 
 @app.route("/")
 def main():
+    """
+    Main page
+    """
     return render_template('index.html')
 
 
@@ -59,14 +60,14 @@ def detect():
     # set label according to condition
     result = True if pred[0][0] == "__label__1" and pred[1][0] > THRESHOLD else False
     f.close()
-    message = "DGA: " + str(result) + ", Probability: " + '{:.4f}'.format(pred[1][0])
+    message = domain_ + " | " + "DGA: " + str(result) + ", Probability: " + '{:.4f}'.format(pred[1][0])
     return jsonify({"status": "success"}), 200
 
 
 @app.route('/bulk', methods=["POST"])
 def bulk():
     """
-    A method that detects bulk domain as dga or not from given log file path
+    A method that detects bulk domain as dga or not from given file
     :return: model result as dga label and model confidence
     """
     whitelist = []
@@ -149,8 +150,9 @@ def configuration():
 @app.route('/whitelist/content/<name>', methods=["GET"])
 def whitelist_content(name):
     """
-    A method that get content of current whitelist
-    :return: content of current whitelist
+    A method that get content of whitelist
+    :param name: name of desired whitelist
+    :return: content of whitelist
     """
     try:
         f = open(f"white_list/{name}", "r")
@@ -189,6 +191,9 @@ def set_whitelist():
 
 @app.route("/result/<method>", methods=["GET"])
 def result(method):
+    """
+    Result pages
+    """
     if method == "predict":
         return render_template("result_index.html", result=message)
     if method == "whitelist":
