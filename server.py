@@ -23,7 +23,7 @@ os.makedirs(dir_upload, exist_ok=True)
 dir_result = os.path.join(os.getcwd(), "results")
 os.makedirs(dir_result, exist_ok=True)
 # current white list path
-curr_white_list = "white_list.txt"
+curr_white_list = "White_list.txt"
 
 
 @app.route("/")
@@ -39,7 +39,7 @@ def detect():
     """
     whitelist = []
     global message
-    f = open("white_list/white_list.txt", 'r')
+    f = open("white_list/White_list.txt", 'r')
     for i in f.readlines():
         whitelist.append(i.replace('\n', ''))
     question = str(request.get_json()["domain"])
@@ -70,7 +70,7 @@ def bulk():
     :return: model result as dga label and model confidence
     """
     whitelist = []
-    f = open("white_list/white_list.txt", 'r')
+    f = open("white_list/White_list.txt", 'r')
     for i in f.readlines():
         whitelist.append(i.replace('\n', ''))
 
@@ -166,7 +166,7 @@ def set_whitelist():
     :return: new whitelist content in new tab
     """
     try:
-        wlist = pd.read_csv("white_list/white_list.txt", names=["domain"])
+        wlist = pd.read_csv("white_list/White_list.txt", names=["domain"])
         # read given whitelist
         if 'file' not in request.files:
             return jsonify({"status": "error", "reason": "no field"}), 400
@@ -180,7 +180,7 @@ def set_whitelist():
         new = pd.concat([wlist, nlist], axis=0, ignore_index=True)
         new.drop_duplicates()
         # export new whitelist as txt
-        wlist_name = f"white_list_{str(int(time.time()))}.txt"
+        wlist_name = f"White_list_{str(int(time.time()))}.txt"
         new.to_csv(f"white_list/{wlist_name}", index=False, header=False)
         return render_template("whitelist.html", name=wlist_name)
     except Exception as e:
