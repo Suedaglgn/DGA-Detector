@@ -11,7 +11,7 @@
                 height: 40px;
             }
             body {
-                 background-image: url('../static/images/cover-image_old.png');
+                 background-image: url('../static/images/bg5.jpg');
                 background-attachment: fixed;
                 background-position: center;
                 background-repeat: round;
@@ -26,10 +26,10 @@
 
     <div class="container">
                 <div class="header">
-                    <h2 style="text-align: center; color: darkorange" class="text-muted"><b>Result</b></h2>
+                    <h2 style="text-align: center; color: palevioletred" class="text-muted"><b>Result</b></h2>
                 </div>
                   <div class="row marketing">
-                    <div class="col-md-4" style="color: #ff8c00; font-weight: bold" id="container">
+                    <div class="col-md-4" style="color: #DB7093FF; font-weight: bold" id="container">
                     </div>
                 </div>
                 <footer style="text-align: center" class="footer">
@@ -39,7 +39,7 @@
 </body>
 
 <script type="text/javascript">
-    var apiUrl = 'http://localhost:5000/whitelist/content/{{ name }}';
+    var apiUrl = '/whitelist/content/{{ name }}';
     fetch(apiUrl).then(response => {
       return response.json();
     }).then(data => {

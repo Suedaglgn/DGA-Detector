@@ -11,7 +11,7 @@
                 height: 40px;
             }
             body {
-                background-image: url('../static/images/cover-image_old.png');
+                background-image: url('../static/images/bg5.jpg');
                 background-attachment: fixed;
                 background-position: center;
                 background-repeat: round;
@@ -54,34 +54,34 @@
     <div class="container">
                 <br><br><br>
                 <div class="header">
-                    <h2 style="text-align: center; color: darkorange" class="text-muted"><b>Whitelists</b></h2>
+                    <h2 style="text-align: center; color: palevioletred" class="text-muted"><b>Whitelists</b></h2>
                 </div>
         <br>
         <br>
                 <div class="row marketing">
-                    <div class="col-md-4" style="color: #ff8c00; font-weight: bold" id="container">
+                    <div class="col-md-4" style="color: #DB7093FF; font-weight: bold" id="container">
                     </div>
                 </div>
         <br>
         <br>
                 <div class="header">
-                    <h2 style="text-align: center; color: darkorange" class="text-muted"><b>Set Whitelist</b></h2>
+                    <h2 style="text-align: center; color: palevioletred" class="text-muted"><b>Set Whitelist</b></h2>
                 </div>
         <br>
         <br>
                 <div id="container2"></div>
         <br>
                 <div>
-                    <button class="dropbtn" id="generate">Generate</button>
+                    <button class="dropbtn" id="generate">Set</button>
                 </div>
         <br>
         <br>
                 <div class="header">
-                    <h2 style="text-align: center; color: darkorange" class="text-muted"><b>Current Whitelist</b></h2>
+                    <h2 style="text-align: center; color: palevioletred" class="text-muted"><b>Current Whitelist</b></h2>
                 </div>
         <br>
                 <div class="row marketing">
-                <div class="col-md-4" style="color: #ff8c00; font-weight: bold" id="container3">
+                <div class="col-md-4" style="color: #DB7093FF; font-weight: bold" id="container3">
                 </div>
                 </div>
 
@@ -92,7 +92,7 @@
 </body>
 
 <script type="text/javascript">
-    var apiUrl = 'http://localhost:5000/whitelist/list';
+    var apiUrl = '/whitelist/list';
     fetch(apiUrl).then(response => {
       return response.json();
     }).then(data => {
@@ -116,7 +116,7 @@
     });
 </script>
 <script type="text/javascript">
-        var getList = 'http://localhost:5000/whitelist/list';
+        var getList = '/whitelist/list';
         fetch(getList).then(response => {
           return response.json();
         }).then(data => {
@@ -141,7 +141,7 @@
         document.getElementById('generate').onclick = function() {
             let e = document.getElementById("list");
             let text = e.options[e.selectedIndex].text;
-            let apiUrl = 'http://localhost:5000/configuration';
+            let apiUrl = '/configuration';
             fetch(apiUrl, {
                     method: 'POST',
                     headers: {
@@ -158,7 +158,7 @@
 </script>
 
 <script>
-    var getConf = 'http://localhost:5000/configuration';
+    var getConf = '/configuration';
     fetch(getConf).then(response => {
       return response.json();
     }).then(data => {

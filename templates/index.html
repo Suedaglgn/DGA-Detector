@@ -13,7 +13,7 @@
                 height: 40px;
             }
             body {
-                background-image: url('../static/images/cover-image_old.png');
+                background-image: url('../static/images/bg5.jpg');
                 background-attachment: fixed;
                 background-position: center;
                 background-repeat: round;
@@ -91,17 +91,17 @@
             <div class="container" >
                 <br>
                 <div class="header">
-                    <h1 style="text-align: center; color: darkorange" class="text-muted"> <b> Patika.dev - Huawei Cloud </b></h1>
+                    <h1 style="text-align: center; color: palevioletred" class="text-muted"> <b> Patika.dev - Huawei Cloud </b></h1>
                 </div>
                     <div class="jumbotron">
-                        <h2 style="text-align: center; color: darkorange" >Final Project</h2>
+                        <h2 style="text-align: center; color: palevioletred" >Final Project</h2>
                         <p class="lead"></p>
                     </p>
                 </div>
                 <br>
                  <div align="center">
                     <div class="col-md-4">
-                       <h3 style="color: darkorange"> ----- Predict a domain! -----</h3>
+                       <h3 style="color: palevioletred"> ----- Predict a domain! -----</h3>
                     </div>
                 </div>
 
@@ -117,12 +117,12 @@
                 <br>
                 <div align="center">
                     <div class="col-md-4">
-                       <h3 style="color: darkorange"> ----- Predict a domain list! -----</h3>
+                       <h3 style="color: palevioletred"> ----- Predict a domain list! -----</h3>
                     </div>
                 </div>
                  <div align="center">
                     <div class="col-md-4">
-                        <form action = "http://localhost:5000/bulk" method = "POST"
+                        <form action = "/bulk" method = "POST"
                              enctype = "multipart/form-data">
                             <label for="file-upload" class="custom-file-upload" style="vertical-align: center">Browse</label>
                             <br>
@@ -136,7 +136,7 @@
                 <br>
                  <div align="center">
                     <div class="col-md-4">
-                       <h3 style="color: darkorange"> ----- Show whitelist! -----</h3>
+                       <h3 style="color: palevioletred"> ----- Show whitelist! -----</h3>
                     </div>
                 </div>
                   <div align="center">
@@ -147,12 +147,12 @@
                 <br>
                 <div align="center">
                     <div class="col-md-4">
-                       <h3 style="color: darkorange"> ----- Upload whitelist! -----</h3>
+                       <h3 style="color: palevioletred"> ----- Upload whitelist! -----</h3>
                     </div>
                 </div>
                  <div align="center">
                     <div class="col-md-4">
-                        <form action = "http://localhost:5000/upload_whitelist" method = "POST"
+                        <form action = "/upload_whitelist" method = "POST"
                              enctype = "multipart/form-data">
                             <label for="file-upload2" class="custom-file-upload" style="vertical-align: center">Browse</label>
                             <br>
@@ -165,7 +165,7 @@
                 <br>
                 <div align="center">
                     <div class="col-md-4">
-                       <h3 style="color: darkorange"> ----- List whitelists! -----</h3>
+                       <h3 style="color: palevioletred"> ----- List whitelists! -----</h3>
                     </div>
                 </div>
                  <div align="center">
@@ -192,11 +192,11 @@
             xmlHttp.setRequestHeader('Content-type', "application/json;charset=UTF-8")
             xmlHttp.send(JSON.stringify({"domain": params}));
             {#return xmlHttp.responseText;#}
-            window.open("http://localhost:5000/result" + "/predict")
+            window.open("/result" + "/predict")
         }
         function whitelist()
         {
-            window.open("http://localhost:5000/result" + "/whitelist")
+            window.open("/result" + "/whitelist")
 
         }
            function upload_whitelist(e)
@@ -208,7 +208,7 @@
         }
          function list_wlist()
         {
-            window.open("http://localhost:5000/result" + "/list_wlist")
+            window.open("/result" + "/list_wlist")
 
         }
     </script>
